@@ -1,6 +1,15 @@
 description: runs kubebot
 name: run
 inputs:
+  QUAY_PASSWORD:
+    string:
+      constraints: { minLength: 1 }
+      description: password for quay docker registry
+      isSecret: true
+  QUAY_USERNAME:
+    string:
+      constraints: { minLength: 1 }
+      description: username for quay docker registry
   KUBEBOT_SLACK_TOKEN:
     string:
       constraints: { minLength: 1}
@@ -18,3 +27,13 @@ inputs:
       constraints: { minLength: 1}
       description: (space separated) kubectl commands the admins will be able to run
       default: get describe logs explain
+run:
+  container:
+    image:
+      ref: 'quay.io/nintex/kubebot:build-poc'
+      pullCreds: { username: $(QUAY_USERNAME), password: $(QUAY_PASSWORD)}
+    envVars:
+      KUBEBOT_SLACK_TOKEN:
+      KUBEBOT_SLACK_CHANNELS_IDS:
+      KUBEBOT_SLACK_ADMINS_NICKNAMES:
+      KUBEBOT_SLACK_VALID_COMMANDS:
