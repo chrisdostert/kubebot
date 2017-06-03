@@ -1,0 +1,43 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "5TD/qr8q1ydWAVWP3utSBy1J4/w=",
+			"path": "github.com/go-chat-bot/bot",
+			"revision": "0797fca850efd26d658a862e94ae06b08edcc88c",
+			"revisionTime": "2017-05-28T18:54:09Z"
+		},
+		{
+			"checksumSHA1": "YDXHoDo0QLCSrMatNyoFSmBMG2A=",
+			"path": "github.com/go-chat-bot/bot/slack",
+			"revision": "0797fca850efd26d658a862e94ae06b08edcc88c",
+			"revisionTime": "2017-05-28T18:54:09Z"
+		},
+		{
+			"checksumSHA1": "3yckDt/xIreJZ/spvI+MvHOCmcY=",
+			"path": "github.com/mattn/go-shellwords",
+			"revision": "02e3cf038dcea8290e44424da473dd12be796a8a",
+			"revisionTime": "2017-04-11T07:14:55Z"
+		},
+		{
+			"checksumSHA1": "upkWdFEdRMLEt0qqKZedNBfPmMI=",
+			"path": "github.com/nlopes/slack",
+			"revision": "c86337c0ef2486a15edd804355d9c73d2f2caed1",
+			"revisionTime": "2017-05-28T20:15:53Z"
+		},
+		{
+			"checksumSHA1": "bOUCnFlRuGN/E633R/lFuiWVrkk=",
+			"path": "github.com/robfig/cron",
+			"revision": "736158dc09e10f1911ca3a1e1b01f11b566ce5db",
+			"revisionTime": "2017-05-26T15:01:27Z"
+		},
+		{
+			"checksumSHA1": "7EZyXN0EmZLgGxZxK01IJua4c8o=",
+			"path": "golang.org/x/net/websocket",
+			"revision": "e4fa1c5465ad6111f206fc92186b8c83d64adbe1",
+			"revisionTime": "2017-06-02T19:04:32Z"
+		}
+	],
+	"rootPath": "github.com/chrisdostert/kubebot"
+}

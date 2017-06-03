@@ -1,0 +1,44 @@
+description: builds the kubebot bin
+name: build
+inputs:
+  srcDir:
+    dir:
+      description: directory containing the packages source code; external deps must be vendored
+      default: .
+  dockerfile:
+    file:
+      default: Dockerfile
+  QUAY_PASSWORD:
+    string:
+      constraints: { minLength: 1 }
+      description: password for quay docker registry
+      isSecret: true
+  QUAY_USERNAME:
+    string:
+      constraints: { minLength: 1 }
+      description: username for quay docker registry
+run:
+  serial:
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/golang.build.bin#1.0.0 }
+        inputs: { srcDir, baseImport: github.com/chrisdostert/kubebot, import: github.com/chrisdostert/kubebot }
+        outputs: { bin }
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/fs.mkdir#1.0.0 }
+        outputs: { buildContext: dir }
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/fs.cp-file#1.0.0 }
+        inputs: { file: $(bin), dir: $(buildContext), name: kubebot }
+        outputs: { buildContext: dir }
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/docker.image.build#1.0.0 }
+        inputs: { dockerfile, imageName: 'quay.io/nintex/kubebot:build-poc', context: $(buildContext) }
+        outputs: { imageTar }
+    - op:
+        pkg: { ref: github.com/opspec-pkgs/docker.image.push#1.0.0 }
+        inputs:
+          imageTar:
+          imageName: 'quay.io/nintex/kubebot:build-poc'
+          username: $(QUAY_USERNAME)
+          password: $(QUAY_PASSWORD)
+          registry: quay.io

@@ -1,0 +1,20 @@
+description: runs kubebot
+name: run
+inputs:
+  KUBEBOT_SLACK_TOKEN:
+    string:
+      constraints: { minLength: 1}
+      description: token you generated in the setup
+  KUBEBOT_SLACK_CHANNELS_IDS:
+    string:
+      constraints: { minLength: 1}
+      description: (space separated) channel ids
+  KUBEBOT_SLACK_ADMINS_NICKNAMES:
+    string:
+      constraints: { minLength: 1}
+      description: (space separated) admin nicknames
+  KUBEBOT_SLACK_VALID_COMMANDS:
+    string:
+      constraints: { minLength: 1}
+      description: (space separated) kubectl commands the admins will be able to run
+      default: get describe logs explain
