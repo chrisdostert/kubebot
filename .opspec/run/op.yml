@@ -1,6 +1,9 @@
 description: runs kubebot
 name: run
 inputs:
+  version:
+    string:
+      description: version of kubebot to run
   QUAY_PASSWORD:
     string:
       constraints: { minLength: 1 }
@@ -30,7 +33,7 @@ inputs:
 run:
   container:
     image:
-      ref: 'quay.io/nintex/kubebot:build-poc'
+      ref: 'quay.io/nintex/kubebot:$(version)'
       pullCreds: { username: $(QUAY_USERNAME), password: $(QUAY_PASSWORD)}
     envVars:
       KUBEBOT_SLACK_TOKEN:

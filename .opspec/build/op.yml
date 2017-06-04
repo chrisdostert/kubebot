@@ -31,14 +31,18 @@ run:
         inputs: { file: $(bin), dir: $(buildContext), name: kubebot }
         outputs: { buildContext: dir }
     - op:
+        pkg: { ref: github.com/opspec-pkgs/git.resolve-commit#1.0.0 }
+        inputs: { dotGitDir: $(srcDir)/.git }
+        outputs: { commit }
+    - op:
         pkg: { ref: github.com/opspec-pkgs/docker.image.build#1.0.0 }
-        inputs: { dockerfile, imageName: 'quay.io/nintex/kubebot:build-poc', context: $(buildContext) }
+        inputs: { dockerfile, imageName: 'quay.io/nintex/kubebot:$(commit)', context: $(buildContext) }
         outputs: { imageTar }
     - op:
         pkg: { ref: github.com/opspec-pkgs/docker.image.push#1.0.0 }
         inputs:
           imageTar:
-          imageName: 'quay.io/nintex/kubebot:build-poc'
+          imageName: 'quay.io/nintex/kubebot:$(commit)'
           username: $(QUAY_USERNAME)
           password: $(QUAY_PASSWORD)
           registry: quay.io
